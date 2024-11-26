@@ -2,14 +2,17 @@ package main
 
 import "fmt"
 
+type transformFn func(int) int
+
 func main() {
 	numbers := []int{1, 2, 3, 4}
-	transformedNumber := transformNumbers(&numbers, triple)
-
-	fmt.Println(transformedNumber)
+	tripleNumber := transformNumbers(&numbers, triple)
+	fmt.Println("Triple:", tripleNumber)
+	doubleNumber := transformNumbers(&numbers, double)
+	fmt.Println("Double:", doubleNumber)
 }
 
-func transformNumbers(numbers *[]int, transform func(int) int) []int {
+func transformNumbers(numbers *[]int, transform transformFn) []int {
 	trNumbers := []int{}
 	for _, val := range *numbers {
 		trNumbers = append(trNumbers, transform(val))
