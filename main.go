@@ -4,20 +4,23 @@ import "fmt"
 
 func main() {
 	numbers := []int{1, 2, 3, 4}
-	doubled := doubleNumbers(&numbers)
+	transformedNumber := transformNumbers(&numbers, triple)
 
-	fmt.Println(doubled)
+	fmt.Println(transformedNumber)
 }
 
-func doubleNumbers(numbers *[]int) []int {
-	dNumbers := []int{}
+func transformNumbers(numbers *[]int, transform func(int) int) []int {
+	trNumbers := []int{}
 	for _, val := range *numbers {
-		dNumbers = append(dNumbers, double(val))
+		trNumbers = append(trNumbers, transform(val))
 	}
 
-	return dNumbers
+	return trNumbers
 }
 
 func double(number int) int {
 	return number * 2
+}
+func triple(number int) int {
+	return number * 3
 }
